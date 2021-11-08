@@ -41,6 +41,10 @@ const Input = styled.input`
     font-size: 22px;
     color: #A0A0A0;
   }
+
+  &:valid {
+    background-color: #ddfada;
+  }
 `;
 
 const Button = styled.button`

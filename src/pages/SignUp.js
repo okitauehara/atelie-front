@@ -89,7 +89,7 @@ function SignUp() {
         />
         <S.Button type="submit" disabled={isDisabled}>Cadastrar</S.Button>
       </S.Form>
-      <Link to="/" disabled={isDisabled}>
+      <Link to="/" style={{ pointerEvents: isDisabled ? 'none' : 'all' }}>
         <S.Redirect>Já tem cadastro? Faça login e aproveite!</S.Redirect>
       </Link>
     </S.PageStyle>

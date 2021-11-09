@@ -26,6 +26,7 @@ const Form = styled.form`
 
 const Input = styled.input`
   width: calc(100vw - 100px);
+  max-width: 700px;
   height: 45px;
   background-color: #F1F5F4;
   font-size: 22px;
@@ -41,17 +42,24 @@ const Input = styled.input`
     font-size: 22px;
     color: #A0A0A0;
   }
+
+  &:valid {
+    background-color: #ddfada;
+  }
 `;
 
 const Button = styled.button`
   width: calc(100vw - 100px);
+  max-width: 700px;
   height: 45px;
   background-color: #368DE3;
   font-family: 'Roboto', sans-serif;
   font-size: 22px;
+  font-weight: 700;
   color: #F1F5F4;
   border: none;
   border-radius: 15px;
+  cursor: pointer;
   margin-bottom: 25px;
 `;
 

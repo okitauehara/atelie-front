@@ -19,7 +19,7 @@ function Home() {
     <>
       <Header />
       <PageStyle>
-        <ul>
+        <Products>
           {products.map((product, index) => (
             <Product
               name={product.name}
@@ -28,7 +28,7 @@ function Home() {
               url={productsData[index].url}
             />
           ))}
-        </ul>
+        </Products>
       </PageStyle>
       <Footer isHome isCart={false} />
     </>
@@ -40,13 +40,13 @@ const PageStyle = styled.div`
   height: 560px;
   margin-bottom: 90px;
   overflow-y: scroll;
+`;
 
-  ul {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
+const Products = styled.ul`
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;
 
 export default Home;

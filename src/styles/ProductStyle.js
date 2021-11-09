@@ -16,9 +16,25 @@ const Container = styled.li`
 const Info = styled.div`
   flex-direction: column;
   justify-content: space-between;
+`;
 
-  div {
-    flex-direction: column;
+const Price = styled.div`
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const Line = styled.div`
+  border: 1px solid #e5e5e5;
+  margin: 10px 30px;
+`;
+
+const ImgProduct = styled.img`
+  height: 145px;
+`;
+
+const TextProduct = styled.div`
+flex-direction: column;
     gap: 10px;
 
     h2 {
@@ -34,20 +50,8 @@ const Info = styled.div`
       color: #545d66;
       width: 150px;
     }
-  }
-`;
-
-const Price = styled.div`
-  color: #000000;
-  font-size: 18px;
-  font-weight: bold;
-`;
-
-const Line = styled.div`
-  border: 1px solid #e5e5e5;
-  margin: 10px 30px;
 `;
 
 export {
-  Container, Info, Price, Line,
+  Container, Info, Price, Line, ImgProduct, TextProduct,
 };

@@ -8,12 +8,12 @@ function Product({ name, description, price, url }) {
     <>
       <S.Container>
         <div>
-          <img src={url} alt="nike shirt" />
+          <S.ImgProduct src={url} alt="nike shirt" />
           <S.Info>
-            <div>
+            <S.TextProduct>
               <h2>{name}</h2>
               <h3>{description}</h3>
-            </div>
+            </S.TextProduct>
             <S.Price>
               R$
               {` ${formatePrice(price)}`}

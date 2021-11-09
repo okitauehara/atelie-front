@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://atelie-staging.herokuapp.com/';
+const BASE_URL = 'https://atelie-staging.herokuapp.com';
 
 // Remover eslint ao implementar rota com autenticação
 // eslint-disable-next-line no-unused-vars
@@ -23,7 +23,4 @@ function getProducts() {
   return promise;
 }
 
-export {
-  postSignUp,
-  getProducts,
-};
+export { postSignUp, getProducts };

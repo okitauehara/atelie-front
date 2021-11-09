@@ -37,7 +37,6 @@ function Home() {
 
 const PageStyle = styled.div`
   margin-top: 90px;
-  height: 560px;
   margin-bottom: 90px;
   overflow-y: scroll;
 `;

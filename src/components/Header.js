@@ -19,6 +19,7 @@ const Container = styled.header`
   position: fixed;
   top: 0;
   z-index: 1;
+  background-color: #ffffff;
 
   div {
     display: flex;

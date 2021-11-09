@@ -1,18 +1,23 @@
-import Nike from '../assets/Camisa Nike.jpg';
+import PropTypes from 'prop-types';
 import * as S from '../styles/ProductStyle';
+import formatePrice from '../services/utils';
 
-function Product() {
+// eslint-disable-next-line object-curly-newline
+function Product({ name, description, price, url }) {
   return (
     <>
       <S.Container>
         <div>
-          <img src={Nike} alt="nike shirt" />
+          <img src={url} alt="nike shirt" />
           <S.Info>
             <div>
-              <h2>Camisa Nike</h2>
-              <h3>Conforte e estilo para o seu dia-a-dia</h3>
+              <h2>{name}</h2>
+              <h3>{description}</h3>
             </div>
-            <S.Price>R$ 250,00</S.Price>
+            <S.Price>
+              R$
+              {` ${formatePrice(price)}`}
+            </S.Price>
           </S.Info>
         </div>
       </S.Container>
@@ -20,5 +25,12 @@ function Product() {
     </>
   );
 }
+
+Product.propTypes = {
+  name: PropTypes.node.isRequired,
+  description: PropTypes.node.isRequired,
+  price: PropTypes.node.isRequired,
+  url: PropTypes.node.isRequired,
+};
 
 export default Product;

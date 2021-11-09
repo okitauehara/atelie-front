@@ -1,18 +1,33 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Product from '../components/Product';
-
-const products = [1, 2, 3, 4, 5, 6];
+import productsData from '../services/productsData';
+import { getProducts } from '../services/API';
 
 function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts().then((res) => {
+      setProducts(res.data);
+    });
+  }, []);
+
+  console.log(products);
   return (
     <>
       <Header />
       <PageStyle>
         <ul>
-          {products.map(() => (
-            <Product />
+          {products.map((product, index) => (
+            <Product
+              name={product.name}
+              description={product.description}
+              price={product.value}
+              url={productsData[index].url}
+            />
           ))}
         </ul>
       </PageStyle>

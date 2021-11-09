@@ -19,13 +19,11 @@ function postSignUp(body) {
 }
 
 function getProducts() {
-  const promise = axios.get('http://localhost:4000/products');
+  const promise = axios.get(`${BASE_URL}/products`);
   return promise;
 }
 
 export {
-  // Remover eslint ao implementar exportação de mais de uma rota
-  // eslint-disable-next-line import/prefer-default-export
   postSignUp,
   getProducts,
 };

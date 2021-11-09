@@ -1,6 +1,13 @@
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
 function Home() {
   return (
-    <h1>Home</h1>
+    <>
+      <Header />
+      <div />
+      <Footer isHome isCart={false} />
+    </>
   );
 }
 

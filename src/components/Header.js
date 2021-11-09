@@ -16,6 +16,7 @@ const Container = styled.header`
   text-align: center;
   position: fixed;
   top: 0;
+  z-index: 1;
 `;
 
 const Img = styled.img`

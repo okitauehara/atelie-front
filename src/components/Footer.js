@@ -33,6 +33,7 @@ const Container = styled.header`
   position: fixed;
   bottom: 0;
   box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
 
   div {
     display: flex;

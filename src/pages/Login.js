@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import Loader from 'react-loader-spinner';
+import { postLogin } from '../services/API';
 import * as S from '../styles/LoginSignUpStyle';
 import logo from '../assets/logo.png';
 
 function Login() {
   const [inputData, setInputData] = useState({ email: '', password: '' });
-  // eslint-disable-next-line no-unused-vars
   const [isDisabled, setIsDisabled] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setInputData({ ...inputData, [event.target.name]: event.target.value });
@@ -14,7 +17,28 @@ function Login() {
 
   const submitLogin = (event) => {
     event.preventDefault();
-    // Inserir lógica para submeter o login
+    setIsDisabled(true);
+    const body = inputData;
+    postLogin(body)
+      .then(() => {
+        setIsDisabled(false);
+        navigate('/home');
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Verifique se todos os dados inseridos são válidos',
+          });
+        }
+        if (err.response.status === 404) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Usuário não cadastrado',
+          });
+        }
+        setIsDisabled(false);
+      });
   };
 
   return (
@@ -29,19 +53,20 @@ function Login() {
           value={inputData.email}
           onChange={handleChange}
           disabled={isDisabled}
-          formNoValidate
+          validation={false}
+          autoFocus
         />
         <S.Input
           required
           placeholder="Senha"
           type="password"
           name="password"
-          value={inputData.email}
+          value={inputData.password}
           onChange={handleChange}
           disabled={isDisabled}
-          formNoValidate
+          validation={false}
         />
-        <S.Button type="submit" disabled={isDisabled}>Entrar</S.Button>
+        <S.Button type="submit" disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#F1F5F4" height={50} width={50} /> : 'Entrar'}</S.Button>
       </S.Form>
       <Link to="/sign-up" style={{ pointerEvents: isDisabled ? 'none' : 'all' }}>
         <S.Redirect>Não tem uma conta? Clique e cadastre-se.</S.Redirect>

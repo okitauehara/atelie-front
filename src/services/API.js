@@ -18,8 +18,12 @@ function postSignUp(body) {
   return promise;
 }
 
+function postLogin(body) {
+  const promise = axios.post(`${BASE_URL}/sign-in`, body);
+  return promise;
+}
+
 export {
-  // Remover eslint ao implementar exportação de mais de uma rota
-  // eslint-disable-next-line import/prefer-default-export
   postSignUp,
+  postLogin,
 };

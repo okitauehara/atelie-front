@@ -1,17 +1,22 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function Footer({ isHome, isCart }) {
   return (
     <Container>
       <div>
-        <HomeIcon isHome={isHome}>
-          <ion-icon name="home-outline" />
-        </HomeIcon>
+        <Link to="/home">
+          <HomeIcon isHome={isHome}>
+            <ion-icon name="home-outline" />
+          </HomeIcon>
+        </Link>
 
-        <CartIcon isCart={isCart}>
-          <ion-icon name="cart-outline" />
-        </CartIcon>
+        <Link to="/cart">
+          <CartIcon isCart={isCart}>
+            <ion-icon name="cart-outline" />
+          </CartIcon>
+        </Link>
       </div>
     </Container>
   );

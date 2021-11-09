@@ -14,6 +14,8 @@ const Container = styled.header`
   height: 80px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
   text-align: center;
+  position: fixed;
+  top: 0;
 `;
 
 const Img = styled.img`

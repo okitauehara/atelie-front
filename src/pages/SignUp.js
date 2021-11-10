@@ -6,7 +6,11 @@ import logo from '../assets/logo.png';
 import { postSignUp } from '../services/API';
 
 function SignUp() {
-  const [inputData, setInputData] = useState({ name: '', email: '', password: '' });
+  const [inputData, setInputData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
   const emailRegex = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
@@ -91,7 +95,9 @@ function SignUp() {
           disabled={isDisabled}
           validation
         />
-        <S.Button type="submit" disabled={isDisabled}>Cadastrar</S.Button>
+        <S.Button type="submit" disabled={isDisabled}>
+          Cadastrar
+        </S.Button>
       </S.Form>
       <Link to="/sign-in" style={{ pointerEvents: isDisabled ? 'none' : 'all' }}>
         <S.Redirect>Já tem cadastro? Faça login e aproveite!</S.Redirect>

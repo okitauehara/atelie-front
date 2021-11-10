@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { IoHomeOutline } from 'react-icons/io5';
+import { FiShoppingCart } from 'react-icons/fi';
 
 function Footer({ isHome, isCart }) {
   return (
     <Container>
-      <Link to="/">
-        <HomeIcon isHome={isHome}>
-          <ion-icon name="home-outline" />
-        </HomeIcon>
-      </Link>
+      <div>
+        <Link to="/">
+          <HomeIcon color={isHome} />
+        </Link>
 
-      <Link to="/cart">
-        <CartIcon isCart={isCart}>
-          <ion-icon name="cart-outline" />
-        </CartIcon>
-      </Link>
+        <Link to="/cart">
+          <CartIcon color={isCart} />
+        </Link>
+      </div>
     </Container>
   );
 }
@@ -38,18 +38,16 @@ const Container = styled.footer`
   align-items: center;
 `;
 
-const HomeIcon = styled.div`
-  ion-icon {
-    font-size: 40px;
-    color: ${(isHome) => (isHome ? '#368DE3' : '#545D66')};
-  }
+const HomeIcon = styled(IoHomeOutline)`
+  font-size: 40px;
+  margin-top: 8px;
+  color: ${(color) => color};
 `;
 
-const CartIcon = styled.div`
-  ion-icon {
-    font-size: 40px;
-    color: ${(isCart) => (!isCart ? '#368DE3' : '#545D66')};
-  }
+const CartIcon = styled(FiShoppingCart)`
+  font-size: 40px;
+  margin-top: 8px;
+  color: ${(color) => color};
 `;
 
 export default Footer;

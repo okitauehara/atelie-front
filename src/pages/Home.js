@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Product from '../components/Product';
@@ -21,17 +22,19 @@ function Home() {
       <PageStyle>
         <Products>
           {products.map((product, index) => (
-            <Product
-              name={product.name}
-              description={product.description}
-              price={product.value}
-              url={productsData[index].url}
-              key={product.id}
-            />
+            <Link to={`/home/${index + 1}`}>
+              <Product
+                key={product.id}
+                name={product.name}
+                description={product.description}
+                price={product.value}
+                url={productsData[index].url}
+              />
+            </Link>
           ))}
         </Products>
       </PageStyle>
-      <Footer isHome isCart={false} />
+      <Footer isHome="#368DE3" isCart="#545D66" />
     </>
   );
 }

@@ -1,63 +1,59 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import { getProduct } from '../services/API';
+import productsData from '../services/productsData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import calca from '../assets/Calça Lacoste.jpg';
+import formatePrice from '../services/utils';
+import * as S from '../styles/ProductPageStyle';
 
 function Product() {
   const { productId } = useParams();
-  const [product, setProduct] = useState([]);
+  const sizes = ['P', 'M', 'G'];
+  const [productInfo, setProductInfo] = useState({
+    id: '',
+    name: '',
+    value: '',
+  });
 
   useEffect(() => {
     getProduct(productId).then((res) => {
-      setProduct(res.data);
+      setProductInfo({
+        id: res.data[0].id,
+        name: res.data[0].name,
+        value: res.data[0].value,
+      });
     });
   }, []);
-
-  console.log(product);
 
   return (
     <>
       <Header />
-      <PageStyle>
-        <div>
-          <img src={calca} alt="" />
-          <h2>Calça Lacoste</h2>
-          <span>R$ 390,00</span>
-          <div>
-            <p>Selecione o tamanho</p>
-            <button type="submit">P</button>
-            <button type="submit">M</button>
-            <button type="submit">G</button>
-          </div>
-          <button type="submit">Adicionar ao carrinho</button>
-        </div>
-      </PageStyle>
+      <S.PageStyle>
+        <S.Container>
+          <S.Img
+            src={
+              productInfo.id === '' ? '' : productsData[productInfo.id - 1].url
+            }
+            alt="product-image"
+          />
+          <S.ProductName>{productInfo.name}</S.ProductName>
+          <S.ProductPrice>
+            R$
+            {formatePrice(productInfo.value)}
+          </S.ProductPrice>
+          <S.SizeArea>
+            <p>Selecione o tamanho: </p>
+            {sizes.map((size) => (
+              <S.SizeButton type="submit">{size}</S.SizeButton>
+            ))}
+          </S.SizeArea>
+          <S.Button>Adicionar ao carrinho</S.Button>
+        </S.Container>
+      </S.PageStyle>
       <Footer isHome="#545D66" isCart="#545D66" />
     </>
   );
 }
-
-const PageStyle = styled.div`
-  margin-top: 90px;
-  margin-bottom: 90px;
-  overflow-y: scroll;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    img {
-      height: 274px;
-    }
-
-    div {
-      flex-direction: row;
-    }
-  }
-`;
 
 export default Product;

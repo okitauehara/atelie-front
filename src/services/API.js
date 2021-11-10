@@ -26,6 +26,11 @@ function getProducts() {
   return promise;
 }
 
+function getProduct(id) {
+  const promise = axios.get(`http://localhost:4000/product/${id}`);
+  return promise;
+}
+
 function requestSignOut() {
   const config = createHeaders();
   const promise = axios.delete(`${BASE_URL}/sign-out`, config);
@@ -36,5 +41,6 @@ export {
   postSignUp,
   postLogin,
   getProducts,
+  getProduct,
   requestSignOut,
 };

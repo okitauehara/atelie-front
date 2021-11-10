@@ -8,7 +8,7 @@ function Footer({ isHome, isCart }) {
   return (
     <Container>
       <div>
-        <Link to="/home">
+        <Link to="/">
           <HomeIcon color={isHome} />
         </Link>
 

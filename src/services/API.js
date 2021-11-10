@@ -37,4 +37,6 @@ function requestSignOut() {
   return promise;
 }
 
-export { postSignUp, postLogin, getProducts, getProduct, requestSignOut };
+export {
+  postSignUp, postLogin, getProducts, getProduct, requestSignOut,
+};

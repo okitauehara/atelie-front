@@ -26,7 +26,7 @@ function Login() {
         setUser(res.data);
         localStorage.setItem('@user', JSON.stringify(res.data));
         setIsDisabled(false);
-        navigate('/home');
+        navigate('/');
       })
       .catch((err) => {
         if (err.response.status === 400) {

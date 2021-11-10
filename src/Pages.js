@@ -9,9 +9,9 @@ import Checkout from './pages/Checkout';
 function Pages() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/sign-in" element={<Login />} />
       <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/home" element={<Home />} />
       <Route path="/home/:productId" element={<Product />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />

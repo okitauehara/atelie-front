@@ -26,7 +26,7 @@ function SignUp() {
           title: 'Usuário cadastrado!',
         });
         setIsDisabled(false);
-        navigate('/');
+        navigate('/sign-in');
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -93,7 +93,7 @@ function SignUp() {
         />
         <S.Button type="submit" disabled={isDisabled}>Cadastrar</S.Button>
       </S.Form>
-      <Link to="/" style={{ pointerEvents: isDisabled ? 'none' : 'all' }}>
+      <Link to="/sign-in" style={{ pointerEvents: isDisabled ? 'none' : 'all' }}>
         <S.Redirect>Já tem cadastro? Faça login e aproveite!</S.Redirect>
       </Link>
     </S.PageStyle>

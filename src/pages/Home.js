@@ -26,6 +26,7 @@ function Home() {
               description={product.description}
               price={product.value}
               url={productsData[index].url}
+              key={product.id}
             />
           ))}
         </Products>

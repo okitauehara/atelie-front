@@ -27,7 +27,7 @@ function getProducts() {
 }
 
 function getProduct(id) {
-  const promise = axios.get(`http://localhost:4000/product/${id}`);
+  const promise = axios.get(`${BASE_URL}/product/${id}`);
   return promise;
 }
 
@@ -37,10 +37,4 @@ function requestSignOut() {
   return promise;
 }
 
-export {
-  postSignUp,
-  postLogin,
-  getProducts,
-  getProduct,
-  requestSignOut,
-};
+export { postSignUp, postLogin, getProducts, getProduct, requestSignOut };

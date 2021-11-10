@@ -26,7 +26,7 @@ function Login() {
         setUser(res.data);
         localStorage.setItem('@user', JSON.stringify(res.data));
         setIsDisabled(false);
-        navigate('/home');
+        navigate('/');
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -70,9 +70,18 @@ function Login() {
           disabled={isDisabled}
           validation={false}
         />
-        <S.Button type="submit" disabled={isDisabled}>{isDisabled ? <Loader type="ThreeDots" color="#F1F5F4" height={50} width={50} /> : 'Entrar'}</S.Button>
+        <S.Button type="submit" disabled={isDisabled}>
+          {isDisabled ? (
+            <Loader type="ThreeDots" color="#F1F5F4" height={50} width={50} />
+          ) : (
+            'Entrar'
+          )}
+        </S.Button>
       </S.Form>
-      <Link to="/sign-up" style={{ pointerEvents: isDisabled ? 'none' : 'all' }}>
+      <Link
+        to="/sign-up"
+        style={{ pointerEvents: isDisabled ? 'none' : 'all' }}
+      >
         <S.Redirect>Não tem uma conta? Clique e cadastre-se.</S.Redirect>
       </Link>
     </S.PageStyle>

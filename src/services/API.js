@@ -26,6 +26,11 @@ function getProducts() {
   return promise;
 }
 
+function getProduct(id) {
+  const promise = axios.get(`${BASE_URL}/product/${id}`);
+  return promise;
+}
+
 function requestSignOut() {
   const config = createHeaders();
   const promise = axios.delete(`${BASE_URL}/sign-out`, config);
@@ -33,8 +38,5 @@ function requestSignOut() {
 }
 
 export {
-  postSignUp,
-  postLogin,
-  getProducts,
-  requestSignOut,
+  postSignUp, postLogin, getProducts, getProduct, requestSignOut,
 };

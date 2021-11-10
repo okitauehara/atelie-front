@@ -2,8 +2,6 @@ import axios from 'axios';
 
 const BASE_URL = 'https://atelie-staging.herokuapp.com';
 
-// Remover eslint ao implementar rota com autenticação
-// eslint-disable-next-line no-unused-vars
 function createHeaders(token) {
   const config = {
     headers: {
@@ -18,9 +16,25 @@ function postSignUp(body) {
   return promise;
 }
 
+function postLogin(body) {
+  const promise = axios.post(`${BASE_URL}/sign-in`, body);
+  return promise;
+}
+
 function getProducts() {
   const promise = axios.get(`${BASE_URL}/products`);
   return promise;
 }
 
-export { postSignUp, getProducts };
+function requestSignOut() {
+  const config = createHeaders();
+  const promise = axios.delete(`${BASE_URL}/sign-out`, config);
+  return promise;
+}
+
+export {
+  postSignUp,
+  postLogin,
+  getProducts,
+  requestSignOut,
+};

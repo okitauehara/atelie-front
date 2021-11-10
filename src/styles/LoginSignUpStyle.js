@@ -44,7 +44,7 @@ const Input = styled.input`
   }
 
   &:valid {
-    background-color: #ddfada;
+    background-color: ${(props) => (props.validation ? '#ddfada' : '#F1F5F4')};
   }
 `;
 
@@ -56,6 +56,9 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
   font-size: 22px;
   font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #F1F5F4;
   border: none;
   border-radius: 15px;

@@ -59,6 +59,7 @@ function SignUp() {
           minLength="3"
           autoFocus
           disabled={isDisabled}
+          validation
         />
         <S.Input
           required
@@ -69,6 +70,7 @@ function SignUp() {
           onChange={handleChange}
           pattern={emailRegex}
           disabled={isDisabled}
+          validation
         />
         <S.Input
           required
@@ -79,6 +81,7 @@ function SignUp() {
           onChange={handleChange}
           minLength="8"
           disabled={isDisabled}
+          validation
         />
         <S.Input
           required
@@ -86,6 +89,7 @@ function SignUp() {
           type="password"
           pattern={inputData.password}
           disabled={isDisabled}
+          validation
         />
         <S.Button type="submit" disabled={isDisabled}>Cadastrar</S.Button>
       </S.Form>

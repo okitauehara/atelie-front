@@ -1,14 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
 import { postLogin } from '../services/API';
+import UserContext from '../contexts/UserContext';
 import * as S from '../styles/LoginSignUpStyle';
 import logo from '../assets/logo.png';
 
 function Login() {
   const [inputData, setInputData] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(false);
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -20,7 +22,9 @@ function Login() {
     setIsDisabled(true);
     const body = inputData;
     postLogin(body)
-      .then(() => {
+      .then((res) => {
+        setUser(res.data);
+        localStorage.setItem('@user', JSON.stringify(res.data));
         setIsDisabled(false);
         navigate('/home');
       })

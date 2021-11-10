@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = 'http://localhost:4001';
 
 // Remover eslint ao implementar rota com autenticação
 // eslint-disable-next-line no-unused-vars

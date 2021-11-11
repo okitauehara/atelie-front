@@ -9,12 +9,10 @@ function Success() {
       <Header />
       <PageStyle>
         <CheckmarkIcon />
-        <SuccessText>
-          Pedido concluído com sucesso!!
-        </SuccessText>
-        <SuccessText>
-          Obrigado pela preferência :)
-        </SuccessText>
+        <Texts>
+          <SuccessText>Pedido concluído com sucesso!!</SuccessText>
+          <SuccessText>Obrigado pela preferência :)</SuccessText>
+        </Texts>
       </PageStyle>
       <Footer />
     </>
@@ -37,10 +35,17 @@ const CheckmarkIcon = styled(IoIosCheckmarkCircleOutline)`
   color: #183E63;
 `;
 
+const Texts = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+`;
+
 const SuccessText = styled.p`
   font-size: 18px;
   color: #183E63;
-  margin-top: 30px;
+  margin-bottom: 10px;
 `;
 
 export default Success;

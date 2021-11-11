@@ -7,15 +7,13 @@ import { FiShoppingCart } from 'react-icons/fi';
 function Footer({ isHome, isCart }) {
   return (
     <Container>
-      <div>
-        <Link to="/">
-          <HomeIcon color={isHome} />
-        </Link>
+      <Link to="/">
+        <HomeIcon color={isHome} />
+      </Link>
 
-        <Link to="/cart">
-          <CartIcon color={isCart} />
-        </Link>
-      </div>
+      <Link to="/cart">
+        <CartIcon color={isCart} />
+      </Link>
     </Container>
   );
 }
@@ -33,12 +31,9 @@ const Container = styled.footer`
   box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.25);
   z-index: 1;
   background-color: #ffffff;
-
-  div {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 const HomeIcon = styled(IoHomeOutline)`

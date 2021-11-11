@@ -1,19 +1,28 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
+import { RiLogoutBoxRLine, RiUserSharedLine } from 'react-icons/ri';
 import Logo from '../assets/logo2.png';
 import UserContext from '../contexts/UserContext';
 import { requestSignOut } from '../services/API';
 
 function Header() {
+  const [isLogged, setIsLogged] = useState(false);
   const { user, setUser } = useContext(UserContext);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user === null) {
+      setIsLogged(false);
+    } else {
+      setIsLogged(true);
+    }
+  }, [isLogged]);
 
   const logoutUser = async () => {
     await Swal.fire({
       title: 'Deseja deslogar de sua conta?',
-      text: 'Você terá que inserir seus dados novamente no próximo acesso',
+      text: 'Você precisará reinserir seus dados ao finalizar a compra',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sim',
@@ -24,7 +33,7 @@ function Header() {
           .then(() => {
             localStorage.removeItem('@user');
             setUser('');
-            navigate('/');
+            window.location.reload(false);
           })
           .catch((err) => {
             if (err.response.status === 401) {
@@ -40,10 +49,8 @@ function Header() {
 
   return (
     <Container>
-      <div>
-        <Img src={Logo} alt="logo" />
-        <ion-icon onClick={logoutUser} name="log-out-outline" />
-      </div>
+      <Img src={Logo} alt="logo" />
+      {isLogged ? <LogoutIcon onClick={logoutUser} /> : <Link to="/sign-in"><LoginIcon /></Link>}
     </Container>
   );
 }
@@ -53,27 +60,28 @@ const Container = styled.header`
   height: 80px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
   position: fixed;
-  top: 0;
+  top: 0px;
+  left: 0px;
   z-index: 1;
   background-color: #ffffff;
-
-  div {
-    display: flex;
-    justify-content: space-around;
-    gap: 100px;
-    align-items: center;
-
-    ion-icon {
-      margin-top: 15px;
-      font-size: 40px;
-      color: #368de3;
-    }
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px 0px 20px;
 `;
 
 const Img = styled.img`
-  margin-top: 15px;
-  height: 47px;
+  height: 40px;
+`;
+
+const LogoutIcon = styled(RiLogoutBoxRLine)`
+  font-size: 35px;
+  color: #368de3;
+`;
+
+const LoginIcon = styled(RiUserSharedLine)`
+  font-size: 35px;
+  color: #368de3;
 `;
 
 export default Header;

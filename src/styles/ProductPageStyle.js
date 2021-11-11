@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 const PageStyle = styled.div`
-  margin-top: 120px;
+  margin-top: 90px;
   margin-bottom: 90px;
-  overflow-y: scroll;
 
   div {
     display: flex;

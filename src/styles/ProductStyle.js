@@ -27,6 +27,10 @@ const Price = styled.div`
 const Line = styled.div`
   border: 1px solid #e5e5e5;
   margin: 10px 30px;
+
+  :nth-last-child() {
+    border: none;
+  }
 `;
 
 const ImgProduct = styled.img`

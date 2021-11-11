@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Product from '../components/Product';
 import productsData from '../services/productsData';
 import { getProducts } from '../services/API';
+import Loading from '../components/Loading';
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -19,21 +20,23 @@ function Home() {
   return (
     <>
       <Header />
-      <PageStyle>
-        <Products>
-          {products.map((product, index) => (
-            <Link to={`/home/${index + 1}`}>
-              <Product
-                key={product.id}
-                name={product.name}
-                description={product.description}
-                price={product.value}
-                url={productsData[index].url}
-              />
-            </Link>
-          ))}
-        </Products>
-      </PageStyle>
+      {products.length === 0 ? <Loading /> : (
+        <PageStyle>
+          <Products>
+            {products.map((product, index) => (
+              <Link to={`/home/${index + 1}`}>
+                <Product
+                  key={product.id}
+                  name={product.name}
+                  description={product.description}
+                  price={product.value}
+                  url={productsData[index].url}
+                />
+              </Link>
+            ))}
+          </Products>
+        </PageStyle>
+      )}
       <Footer isHome="#368DE3" isCart="#545D66" />
     </>
   );

@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import formatePrice from '../services/utils';
 import * as S from '../styles/ProductPageStyle';
+import Loading from '../components/Loading';
 
 function Product() {
   const { productId } = useParams();
@@ -29,28 +30,31 @@ function Product() {
   return (
     <>
       <Header />
-      <S.PageStyle>
-        <S.Container>
-          <S.Img
-            src={
+      {productInfo.id === '' ? <Loading /> : (
+        <S.PageStyle>
+          <S.Container>
+            <S.Img
+              src={
               productInfo.id === '' ? '' : productsData[productInfo.id - 1].url
             }
-            alt="product-image"
-          />
-          <S.ProductName>{productInfo.name}</S.ProductName>
-          <S.ProductPrice>
-            R$
-            {formatePrice(productInfo.value)}
-          </S.ProductPrice>
-          <S.SizeArea>
-            <p>Selecione o tamanho: </p>
-            {sizes.map((size) => (
-              <S.SizeButton type="submit">{size}</S.SizeButton>
-            ))}
-          </S.SizeArea>
-          <S.Button>Adicionar ao carrinho</S.Button>
-        </S.Container>
-      </S.PageStyle>
+              alt="product-image"
+            />
+            <S.ProductName>{productInfo.name}</S.ProductName>
+            <S.ProductPrice>
+              R$
+              {formatePrice(productInfo.value)}
+            </S.ProductPrice>
+            <S.SizeArea>
+              <p>Selecione o tamanho: </p>
+              {sizes.map((size, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <S.SizeButton type="submit" key={index}>{size}</S.SizeButton>
+              ))}
+            </S.SizeArea>
+            <S.Button>Adicionar ao carrinho</S.Button>
+          </S.Container>
+        </S.PageStyle>
+      )}
       <Footer isHome="#545D66" isCart="#545D66" />
     </>
   );

@@ -84,6 +84,13 @@ function Login() {
       >
         <S.Redirect>Não tem uma conta? Clique e cadastre-se.</S.Redirect>
       </Link>
+      <S.Text>ou</S.Text>
+      <Link
+        to="/"
+        style={{ pointerEvents: isDisabled ? 'none' : 'all' }}
+      >
+        <S.Redirect>Clique para visualizar os produtos</S.Redirect>
+      </Link>
     </S.PageStyle>
   );
 }

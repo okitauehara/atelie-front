@@ -7,15 +7,13 @@ import { FiShoppingCart } from 'react-icons/fi';
 function Footer({ isHome, isCart }) {
   return (
     <Container>
-      <div>
-        <Link to="/">
-          <HomeIcon color={isHome} />
-        </Link>
+      <Link to="/">
+        <HomeIcon color={isHome} />
+      </Link>
 
-        <Link to="/cart">
-          <CartIcon color={isCart} />
-        </Link>
-      </div>
+      <Link to="/cart">
+        <CartIcon color={isCart} />
+      </Link>
     </Container>
   );
 }

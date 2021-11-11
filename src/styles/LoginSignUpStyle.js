@@ -74,6 +74,14 @@ const Redirect = styled.p`
   line-height: 2;
 `;
 
+const Text = styled.p`
+  font-size: 15px;
+  font-weight: 700;
+  color: #F1F5F4;
+  word-break: break-word;
+  line-height: 2;
+`;
+
 export {
   PageStyle,
   Logo,
@@ -81,4 +89,5 @@ export {
   Input,
   Button,
   Redirect,
+  Text,
 };

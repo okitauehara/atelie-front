@@ -34,6 +34,10 @@ const Container = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  a {
+    color: #545D66;
+  }
 `;
 
 const HomeIcon = styled(IoHomeOutline)`

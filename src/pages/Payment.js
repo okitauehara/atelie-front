@@ -67,6 +67,7 @@ function Payment() {
             onChange={handleAddressChange}
             onBlur={() => searchCep(cepData.cep)}
             style={{ width: '50vw' }}
+            autoFocus
           />
           <S.Input
             required

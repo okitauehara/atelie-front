@@ -31,8 +31,8 @@ function getProduct(id) {
   return promise;
 }
 
-function requestSignOut() {
-  const config = createHeaders();
+function requestSignOut(token) {
+  const config = createHeaders(token);
   const promise = axios.delete(`${BASE_URL}/sign-out`, config);
   return promise;
 }
@@ -42,13 +42,15 @@ function getCep(cep) {
   return promise;
 }
 
-function updateUser(body) {
-  const promise = axios.post(`${BASE_URL}/users`, body);
+function updateUser(token, body) {
+  const config = createHeaders(token);
+  const promise = axios.post(`${BASE_URL}/users`, config, body);
   return promise;
 }
 
-function updateOrder(body) {
-  const promise = axios.post(`${BASE_URL}/users`, body);
+function updateOrder(token, body) {
+  const config = createHeaders(token);
+  const promise = axios.post(`${BASE_URL}/users`, config, body);
   return promise;
 }
 

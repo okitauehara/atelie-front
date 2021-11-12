@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -7,8 +7,10 @@ import Footer from '../components/Footer';
 import { getCep, updateUser, updateOrder } from '../services/API';
 import { Button } from '../styles/ProductPageStyle';
 import * as S from '../styles/PaymentStyle';
+import UserContext from '../contexts/UserContext';
 
 function Payment() {
+  const { user } = useContext(UserContext);
   const [cepData, setCepData] = useState({ cep: '', number: '' });
   const [paymentData, setPaymentData] = useState({ payment: '' });
   const [cepInfo, setCepInfo] = useState('');
@@ -43,8 +45,8 @@ function Payment() {
       });
     }
     cepData.number = Number(cepData.number);
-    await updateOrder(paymentData);
-    updateUser(cepData)
+    await updateOrder(user.token, paymentData);
+    updateUser(user.token, cepData)
       .then(() => navigate('/checkout'));
   };
 

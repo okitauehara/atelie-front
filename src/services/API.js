@@ -31,8 +31,24 @@ function getProduct(id) {
   return promise;
 }
 
-function requestSignOut(token) {
+function updateProductSizes(id, body) {
+  const promise = axios.put(`${BASE_URL}/product/${id}`, body);
+  return promise;
+}
+
+function createNewOrder(id, token) {
   const config = createHeaders(token);
+  const promise = axios.post(`${BASE_URL}/product/${id}`, {}, config);
+  return promise;
+}
+
+function createNewCart(id, body) {
+  const promise = axios.post(`${BASE_URL}/cart/${id}`, body);
+  return promise;
+}
+
+function requestSignOut() {
+  const config = createHeaders();
   const promise = axios.delete(`${BASE_URL}/sign-out`, config);
   return promise;
 }
@@ -55,5 +71,15 @@ function updateOrder(token, body) {
 }
 
 export {
-  postSignUp, postLogin, getProducts, getProduct, requestSignOut, getCep, updateUser, updateOrder,
+  postSignUp,
+  postLogin,
+  getProducts,
+  getProduct,
+  requestSignOut,
+  getCep,
+  updateUser,
+  updateOrder,
+  updateProductSizes,
+  createNewOrder,
+  createNewCart,
 };

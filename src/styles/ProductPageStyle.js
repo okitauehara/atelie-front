@@ -35,18 +35,6 @@ const PageStyle = styled.div`
         font-family: 'Roboto', sans-serif;
         color: #545d66;
       }
-
-      button {
-        font-weight: 600;
-        font-size: 15px;
-        padding: 0;
-        height: 26px;
-        width: 24px;
-        text-align: center;
-        margin-left: 15px;
-        border: 0;
-        background-color: #e5e5e5;
-      }
     }
   }
 `;
@@ -82,19 +70,19 @@ const SizeArea = styled.div`
   p {
     font-family: 'Roboto', sans-serif;
     color: #545d66;
+    margin-right: 5px;
   }
-`;
 
-const SizeButton = styled.button`
-  font-weight: 600;
-  font-size: 15px;
-  padding: 0;
-  height: 26px;
-  width: 24px;
-  text-align: center;
-  margin-left: 15px;
-  border: 0;
-  background-color: #e5e5e5;
+  input {
+    margin-left: 10px;
+  }
+
+  label {
+    font-family: 'Roboto',  sans-serif;
+    margin-left: 2px;
+    margin-top: 5px;
+    font-size: 18px;
+  }
 `;
 
 const Button = styled.button`
@@ -116,6 +104,5 @@ export {
   ProductName,
   ProductPrice,
   SizeArea,
-  SizeButton,
   Button,
 };

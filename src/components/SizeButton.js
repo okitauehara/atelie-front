@@ -1,19 +1,19 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-param-reassign */
 import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function SizeButton({ text, selectSize }) {
-  // eslint-disable-next-line no-unused-vars
-  const [isSelected, setIsSelected] = useState(false);
+function SizeButton({ text, selectSize, isSelected }) {
+  const [selected, setSelected] = useState(isSelected);
 
   function handleClick() {
-    setIsSelected(!isSelected);
+    setSelected(!selected);
     selectSize(text);
   }
 
   return (
-    // eslint-disable-next-line react/jsx-no-bind
-    <SizeButtonStyled selected={isSelected} onClick={handleClick}>
+    <SizeButtonStyled selected={selected} onClick={handleClick}>
       {text}
     </SizeButtonStyled>
   );
@@ -22,6 +22,7 @@ function SizeButton({ text, selectSize }) {
 SizeButton.propTypes = {
   text: PropTypes.node.isRequired,
   selectSize: PropTypes.node.isRequired,
+  isSelected: PropTypes.node.isRequired,
 };
 
 const SizeButtonStyled = styled.button`

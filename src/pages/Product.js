@@ -1,3 +1,5 @@
+/* eslint-disable no-unneeded-ternary */
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
@@ -15,9 +17,23 @@ import Loading from '../components/Loading';
 import UserContext from '../contexts/UserContext';
 
 function Product() {
-  const sizes = ['P', 'M', 'G'];
+  const sizesArr = [
+    {
+      name: 'P',
+      isSelected: false,
+    },
+    {
+      name: 'M',
+      isSelected: false,
+    },
+    {
+      name: 'G',
+      isSelected: false,
+    },
+  ];
   const { productId } = useParams();
   const { user } = useContext(UserContext);
+  const [sizes, setSizes] = useState(sizesArr);
   const [isDisabled, setIsDisabled] = useState(true);
   const [productInfo, setProductInfo] = useState({
     id: '',
@@ -38,26 +54,51 @@ function Product() {
   }, []);
 
   function selectSize(size) {
+    sizesArr.forEach((s) => {
+      s.isSelected = false;
+      if (s.name === size) {
+        s.isSelected = true;
+      }
+    });
+    console.log(sizesArr);
+    setSizes(sizesArr);
+    console.log(sizes);
     setProductInfo({ ...productInfo, size });
     setIsDisabled(!isDisabled);
   }
 
-  function addToCart(id, token) {
-    createNewOrder(id, token)
-      .then((res) => {
-        const orderId = res.data.order_id;
-        const body = {
-          size: productInfo.size,
-        };
-        updateProductSizes(productId, body);
-        navigate(`/cart/${orderId}`);
-      })
-      .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Não foi possível inserir o produto no carrinho.',
-        });
+  // eslint-disable-next-line consistent-return
+  async function addToCart(id, token) {
+    if (user === null) {
+      await Swal.fire({
+        title: 'Deseja fazer login?',
+        text: 'Para adicionar produtos ao carrinho você precisa estar logado',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/sign-in');
+        }
       });
+    } else {
+      createNewOrder(id, token)
+        .then((res) => {
+          const orderId = res.data.order_id;
+          const body = {
+            size: productInfo.size,
+          };
+          updateProductSizes(productId, body);
+          navigate(`/cart/${orderId}`);
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Não foi possível inserir o produto no carrinho.',
+          });
+        });
+    }
   }
 
   return (
@@ -79,17 +120,17 @@ function Product() {
             </S.ProductPrice>
             <S.SizeArea>
               <p>Selecione o tamanho: </p>
-              {sizes.map((size, index) => (
+              {sizesArr.map((size, index) => (
                 <SizeButton
                   key={index}
                   selectSize={selectSize}
                   type="submit"
-                  text={size}
-                  isSelected={false}
+                  text={size.name}
+                  isSelected={size.isSelected}
                 />
               ))}
             </S.SizeArea>
-            <S.Button onClick={() => addToCart(productId, user.token)} disabled={isDisabled}>Adicionar ao carrinho</S.Button>
+            <S.Button onClick={() => addToCart(productId, user?.token)} disabled={productInfo.size !== '' ? false : true}>Adicionar ao carrinho</S.Button>
           </S.Container>
         </S.PageStyle>
       )}

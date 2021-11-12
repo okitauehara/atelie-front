@@ -18,7 +18,7 @@ function postSignUp(body) {
 
 function postLogin(body) {
   // eslint-disable-next-line quotes
-  const promise = axios.post(`${BASE_URL}/sign-in`, body);
+  const promise = axios.post(`http://localhost:4000/sign-in`, body);
   return promise;
 }
 
@@ -33,13 +33,13 @@ function getProduct(id) {
 }
 
 function updateProductSizes(id, body) {
-  const promise = axios.put(`${BASE_URL}/product/${id}`, body);
+  const promise = axios.put(`http://localhost:4000/product/${id}`, body);
   return promise;
 }
 
 function createNewOrder(id, token) {
   const config = createHeaders(token);
-  const promise = axios.post(`${BASE_URL}/product/${id}`, {}, config);
+  const promise = axios.post(`http://localhost:4000/product/${id}`, {}, config);
   return promise;
 }
 

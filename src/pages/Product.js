@@ -84,8 +84,6 @@ function Product() {
     }
   }
 
-  console.log(productInfo);
-
   return (
     <>
       <Header />

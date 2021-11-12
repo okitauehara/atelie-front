@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://atelie-staging.herokuapp.com';
+const BASE_URL = 'http://localhost:4001';
+// https://atelie-staging.herokuapp.com
 
 function createHeaders(token) {
   const config = {
@@ -60,13 +61,13 @@ function getCep(cep) {
 
 function updateUser(token, body) {
   const config = createHeaders(token);
-  const promise = axios.post(`${BASE_URL}/users`, config, body);
+  const promise = axios.put(`${BASE_URL}/users`, body, config);
   return promise;
 }
 
 function updateOrder(token, body) {
   const config = createHeaders(token);
-  const promise = axios.post(`${BASE_URL}/users`, config, body);
+  const promise = axios.post(`${BASE_URL}/orders`, config, body);
   return promise;
 }
 

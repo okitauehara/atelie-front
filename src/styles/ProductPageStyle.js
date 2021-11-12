@@ -70,6 +70,18 @@ const SizeArea = styled.div`
   p {
     font-family: 'Roboto', sans-serif;
     color: #545d66;
+    margin-right: 5px;
+  }
+
+  input {
+    margin-left: 10px;
+  }
+
+  label {
+    font-family: 'Roboto',  sans-serif;
+    margin-left: 2px;
+    margin-top: 5px;
+    font-size: 18px;
   }
 `;
 

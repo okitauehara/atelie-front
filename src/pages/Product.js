@@ -1,39 +1,24 @@
-/* eslint-disable no-unneeded-ternary */
-/* eslint-disable no-param-reassign */
-/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
+/* eslint-disable object-curly-newline */
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { getProduct, updateProductSizes, createNewOrder } from '../services/API';
+import { getProduct, updateProductSizes, createNewOrder, createNewCart } from '../services/API';
 import productsData from '../services/productsData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import SizeButton from '../components/SizeButton';
 import formatePrice from '../services/utils';
 import * as S from '../styles/ProductPageStyle';
 import Loading from '../components/Loading';
 import UserContext from '../contexts/UserContext';
+import CartContext from '../contexts/CartContext';
 
 function Product() {
-  const sizesArr = [
-    {
-      name: 'P',
-      isSelected: false,
-    },
-    {
-      name: 'M',
-      isSelected: false,
-    },
-    {
-      name: 'G',
-      isSelected: false,
-    },
-  ];
+  const sizes = ['P', 'M', 'G'];
   const { productId } = useParams();
   const { user } = useContext(UserContext);
-  const [sizes, setSizes] = useState(sizesArr);
+  const { setCart } = useContext(CartContext);
   const [isDisabled, setIsDisabled] = useState(true);
   const [productInfo, setProductInfo] = useState({
     id: '',
@@ -54,20 +39,10 @@ function Product() {
   }, []);
 
   function selectSize(size) {
-    sizesArr.forEach((s) => {
-      s.isSelected = false;
-      if (s.name === size) {
-        s.isSelected = true;
-      }
-    });
-    console.log(sizesArr);
-    setSizes(sizesArr);
-    console.log(sizes);
     setProductInfo({ ...productInfo, size });
     setIsDisabled(!isDisabled);
   }
 
-  // eslint-disable-next-line consistent-return
   async function addToCart(id, token) {
     if (user === null) {
       await Swal.fire({
@@ -86,10 +61,18 @@ function Product() {
       createNewOrder(id, token)
         .then((res) => {
           const orderId = res.data.order_id;
-          const body = {
+          setCart(orderId);
+          const bodyUpdateSize = {
             size: productInfo.size,
           };
-          updateProductSizes(productId, body);
+          const bodyAddProductToCart = {
+            productName: productInfo.name,
+            productSize: productInfo.size,
+            productValue: productInfo.value,
+            productQty: 1,
+          };
+          updateProductSizes(productId, bodyUpdateSize);
+          createNewCart(orderId, bodyAddProductToCart);
           navigate(`/cart/${orderId}`);
         })
         .catch(() => {
@@ -100,6 +83,8 @@ function Product() {
         });
     }
   }
+
+  console.log(productInfo);
 
   return (
     <>
@@ -120,17 +105,14 @@ function Product() {
             </S.ProductPrice>
             <S.SizeArea>
               <p>Selecione o tamanho: </p>
-              {sizesArr.map((size, index) => (
-                <SizeButton
-                  key={index}
-                  selectSize={selectSize}
-                  type="submit"
-                  text={size.name}
-                  isSelected={size.isSelected}
-                />
+              {sizes.map((size, index) => (
+                <>
+                  <input onClick={() => selectSize(size)} key={index} type="radio" id={size} name="size" value={size} />
+                  <label htmlFor={size}>{size}</label>
+                </>
               ))}
             </S.SizeArea>
-            <S.Button onClick={() => addToCart(productId, user?.token)} disabled={productInfo.size !== '' ? false : true}>Adicionar ao carrinho</S.Button>
+            <S.Button onClick={() => addToCart(productId, user?.token)} disabled={isDisabled}>Adicionar ao carrinho</S.Button>
           </S.Container>
         </S.PageStyle>
       )}

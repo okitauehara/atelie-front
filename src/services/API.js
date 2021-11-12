@@ -37,6 +37,21 @@ function requestSignOut() {
   return promise;
 }
 
+function getCep(cep) {
+  const promise = axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+  return promise;
+}
+
+function updateUser(body) {
+  const promise = axios.post(`${BASE_URL}/users`, body);
+  return promise;
+}
+
+function updateOrder(body) {
+  const promise = axios.post(`${BASE_URL}/users`, body);
+  return promise;
+}
+
 export {
-  postSignUp, postLogin, getProducts, getProduct, requestSignOut,
+  postSignUp, postLogin, getProducts, getProduct, requestSignOut, getCep, updateUser, updateOrder,
 };

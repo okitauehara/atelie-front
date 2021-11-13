@@ -1,15 +1,23 @@
 /* eslint-disable react/jsx-one-expression-per-line */
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import * as S from '../styles/ProductStyle';
-import formatePrice from '../services/utils';
+import { formatePrice, loadImg } from '../services/utils';
 
 function CartProduct({ product }) {
+  const [img, setImg] = useState('');
+
+  useEffect(() => {
+    const imgUrl = loadImg(product.product_name);
+    setImg(imgUrl);
+  }, []);
+
   return (
     <>
       <S.Container>
         <div>
-          <S.ImgProduct src={`../assets/${product.product_name}.jpg`} alt="nike shirt" />
+          <S.ImgProduct src={img} alt="nike shirt" />
           <S.Info>
             <S.TextProduct>
               <h2>{product.product_name}</h2>

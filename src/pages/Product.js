@@ -13,7 +13,7 @@ import {
 import productsData from '../services/productsData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import formatePrice from '../services/utils';
+import { formatePrice } from '../services/utils';
 import * as S from '../styles/ProductPageStyle';
 import Loading from '../components/Loading';
 import UserContext from '../contexts/UserContext';

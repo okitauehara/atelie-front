@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import formatePrice from '../services/utils';
+import { formatePrice } from '../services/utils';
 import CartProduct from '../components/CartProduct';
 import { getCartProducts } from '../services/API';
 import Loading from '../components/Loading';

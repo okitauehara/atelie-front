@@ -1,17 +1,21 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { IoHomeOutline } from 'react-icons/io5';
 import { FiShoppingCart } from 'react-icons/fi';
+import CartContext from '../contexts/CartContext';
 
 function Footer({ isHome, isCart }) {
+  const { cart } = useContext(CartContext);
+
   return (
     <Container>
       <Link to="/">
         <HomeIcon color={isHome} />
       </Link>
 
-      <Link to="/cart">
+      <Link to={cart === '' ? `/cart/${undefined}` : `/cart/${cart}`}>
         <CartIcon color={isCart} />
       </Link>
     </Container>

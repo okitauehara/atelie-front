@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://atelie-staging.herokuapp.com';
+// https://atelie-staging.herokuapp.com
 
 function createHeaders(token) {
   const config = {
@@ -53,12 +54,32 @@ function requestSignOut() {
   return promise;
 }
 
+function getCep(cep) {
+  const promise = axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+  return promise;
+}
+
+function updateUser(token, body) {
+  const config = createHeaders(token);
+  const promise = axios.put(`${BASE_URL}/users`, body, config);
+  return promise;
+}
+
+function updateOrder(token, body) {
+  const config = createHeaders(token);
+  const promise = axios.post(`${BASE_URL}/orders`, config, body);
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
   getProducts,
   getProduct,
   requestSignOut,
+  getCep,
+  updateUser,
+  updateOrder,
   updateProductSizes,
   createNewOrder,
   createNewCart,

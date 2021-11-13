@@ -20,7 +20,9 @@ function Home() {
   return (
     <>
       <Header />
-      {products.length === 0 ? <Loading /> : (
+      {products.length === 0 ? (
+        <Loading />
+      ) : (
         <PageStyle>
           <Products>
             {products.map((product, index) => (

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:4001';
+const BASE_URL = 'https://atelie-staging.herokuapp.com';
 // https://atelie-staging.herokuapp.com
 
 function createHeaders(token) {

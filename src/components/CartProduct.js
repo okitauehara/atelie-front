@@ -23,7 +23,7 @@ function CartProduct({ product }) {
               <h2>{product.product_name}</h2>
               <S.Price>
                 R$
-                {` ${formatePrice(product.product_value.toString())}`}
+                {` ${formatePrice(product.product_value)}`}
               </S.Price>
               <h3>Tamanho: {`${product.product_size}`}</h3>
             </S.TextProduct>

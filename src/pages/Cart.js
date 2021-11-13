@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import styled from 'styled-components';
@@ -9,14 +9,14 @@ import Footer from '../components/Footer';
 import formatePrice from '../services/utils';
 import CartProduct from '../components/CartProduct';
 import { getCartProducts } from '../services/API';
-import UserContext from '../contexts/UserContext';
 import Loading from '../components/Loading';
 
 function Cart() {
   const { orderId } = useParams();
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
+  const [total, setTotal] = useState('');
   const user = JSON.parse(localStorage.getItem('@user'));
+  const navigate = useNavigate();
 
   useEffect(async () => {
     if (!user.token) {
@@ -34,7 +34,14 @@ function Cart() {
       });
     } else {
       getCartProducts(orderId, user.token).then((res) => {
-        setProducts(res.data);
+        const cartProducts = res.data;
+        setProducts(cartProducts);
+
+        let totalPrice = 0;
+        cartProducts.forEach((p) => {
+          totalPrice += p.product_value;
+        });
+        setTotal(totalPrice);
       });
     }
   }, [products]);
@@ -57,7 +64,7 @@ function Cart() {
               <div>Subtotal</div>
               <div>
                 R$
-                {formatePrice(64000)}
+                {formatePrice(total)}
               </div>
             </div>
             <button type="submit">Ir para o checkout</button>

@@ -1,26 +1,27 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import styled from 'styled-components';
-import Nike from '../assets/Camisa Nike.jpg';
+import PropTypes from 'prop-types';
 import * as S from '../styles/ProductStyle';
 import formatePrice from '../services/utils';
 
-function CartProduct() {
+function CartProduct({ product }) {
   return (
     <>
       <S.Container>
         <div>
-          <S.ImgProduct src={Nike} alt="nike shirt" />
+          <S.ImgProduct src={`../assets/${product.product_name}.jpg`} alt="nike shirt" />
           <S.Info>
             <S.TextProduct>
-              <h2>Camisa Nike</h2>
+              <h2>{product.product_name}</h2>
               <S.Price>
                 R$
-                {` ${formatePrice(25000)}`}
+                {` ${formatePrice(product.product_value.toString())}`}
               </S.Price>
-              <h3>Tamanho: G</h3>
+              <h3>Tamanho: {`${product.product_size}`}</h3>
             </S.TextProduct>
             <div>
               <QuantityButton type="submit">-</QuantityButton>
-              <Quantity>1</Quantity>
+              <Quantity>{product.product_qty}</Quantity>
               <QuantityButton type="submit">+</QuantityButton>
             </div>
           </S.Info>
@@ -30,6 +31,10 @@ function CartProduct() {
     </>
   );
 }
+
+CartProduct.propTypes = {
+  product: PropTypes.node.isRequired,
+};
 
 const Quantity = styled.span`
   font-family: Roboto, sans-serif;

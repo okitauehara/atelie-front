@@ -1,34 +1,69 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
+import { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import formatePrice from '../services/utils';
 import CartProduct from '../components/CartProduct';
+import { getCartProducts } from '../services/API';
+import UserContext from '../contexts/UserContext';
+import Loading from '../components/Loading';
 
 function Cart() {
-  const arr = [1, 2, 3];
+  const { orderId } = useParams();
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('@user'));
+
+  useEffect(async () => {
+    if (!user.token) {
+      await Swal.fire({
+        title: 'Login necessário',
+        text: 'Para visualizar seu carrinho você precisa estar logado',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/sign-in');
+        }
+      });
+    } else {
+      getCartProducts(orderId, user.token).then((res) => {
+        setProducts(res.data);
+      });
+    }
+  }, [products]);
 
   return (
     <>
       <Header />
-      <PageStyle>
-        <Products>
-          {arr.map((products, index) => (
-            <CartProduct />
-          ))}
-        </Products>
-        <CheckoutArea>
-          <span>Esvaziar carrinho</span>
-          <div>
-            <div>Subtotal</div>
+      {products.length === 0 ? (
+        <Loading />
+      ) : (
+        <PageStyle>
+          <Products>
+            {products.map((product, index) => (
+              <CartProduct key={index} product={product} />
+            ))}
+          </Products>
+          <CheckoutArea>
+            <span>Esvaziar carrinho</span>
             <div>
-              R$
-              {formatePrice(64000)}
+              <div>Subtotal</div>
+              <div>
+                R$
+                {formatePrice(64000)}
+              </div>
             </div>
-          </div>
-          <button type="submit">Ir para o checkout</button>
-        </CheckoutArea>
-      </PageStyle>
+            <button type="submit">Ir para o checkout</button>
+          </CheckoutArea>
+        </PageStyle>
+      )}
       <Footer isHome="#545D66" isCart="#368DE3" />
     </>
   );

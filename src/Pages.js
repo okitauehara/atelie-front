@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
-import Success from './pages/Success';
+import Payment from './pages/Payment';
 
 function Pages() {
   return (
@@ -14,9 +14,9 @@ function Pages() {
       <Route path="/sign-in" element={<Login />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/home/:productId" element={<Product />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/checkout" element={<Checkout />} />
-      <Route path="/success" element={<Success />} />
+      <Route path="/cart/:orderId" element={<Cart />} />
+      <Route path="/payment/:orderId" element={<Payment />} />
+      <Route path="/checkout/:orderId" element={<Checkout />} />
     </Routes>
   );
 }

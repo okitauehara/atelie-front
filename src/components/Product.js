@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import * as S from '../styles/ProductStyle';
-import formatePrice from '../services/utils';
+import { formatePrice } from '../services/utils';
 
 // eslint-disable-next-line object-curly-newline
 function Product({ name, description, price, url }) {

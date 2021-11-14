@@ -65,9 +65,9 @@ function updateUser(token, body) {
   return promise;
 }
 
-function updateOrder(token, body) {
+function updateOrder(token, body, orderId) {
   const config = createHeaders(token);
-  const promise = axios.post(`${BASE_URL}/orders`, config, body);
+  const promise = axios.post(`${BASE_URL}/orders/${orderId}`, config, body);
   return promise;
 }
 

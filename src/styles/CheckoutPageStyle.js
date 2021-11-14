@@ -18,8 +18,8 @@ const PageTitle = styled.h1`
 `;
 
 const Details = styled.div`
-  height: 275px;
-  margin: 20px 30px;
+  height: 300px;
+  margin: 0px 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,6 +30,7 @@ const Items = styled.div`
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 
   &::-webkit-scrollbar {
     width: 0px;
@@ -56,7 +57,7 @@ const Item = styled.p`
   }
 `;
 const Address = styled.div`
-  height: 90px;
+  height: 125px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import { useContext, useState, useParams } from 'react';
+import { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getCep, updateOrder, updateUser } from '../services/API';

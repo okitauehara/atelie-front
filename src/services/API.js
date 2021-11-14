@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://atelie-staging.herokuapp.com';
-// https://atelie-staging.herokuapp.com
 
 function createHeaders(token) {
   const config = {
@@ -71,6 +70,18 @@ function updateOrder(token, body) {
   return promise;
 }
 
+function getFinalOrder(token, orderId) {
+  const config = createHeaders(token);
+  const promise = axios.get(`${BASE_URL}/cart-products/${orderId}`, config);
+  return promise;
+}
+
+function getOrderDetails(token, orderId) {
+  const config = createHeaders(token);
+  const promise = axios.get(`${BASE_URL}/checkout/${orderId}`, config);
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
@@ -83,4 +94,6 @@ export {
   updateProductSizes,
   createNewOrder,
   createNewCart,
+  getFinalOrder,
+  getOrderDetails,
 };

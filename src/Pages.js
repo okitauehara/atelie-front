@@ -15,7 +15,7 @@ function Pages() {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/home/:productId" element={<Product />} />
       <Route path="/cart/:orderId" element={<Cart />} />
-      <Route path="/payment" element={<Payment />} />
+      <Route path="/payment/:orderId" element={<Payment />} />
       <Route path="/checkout/:orderId" element={<Checkout />} />
     </Routes>
   );

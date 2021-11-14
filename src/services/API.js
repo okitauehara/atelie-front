@@ -67,7 +67,7 @@ function updateUser(token, body) {
 
 function updateOrder(token, body, orderId) {
   const config = createHeaders(token);
-  const promise = axios.post(`${BASE_URL}/orders/${orderId}`, config, body);
+  const promise = axios.put(`${BASE_URL}/orders/${orderId}`, body, config);
   return promise;
 }
 
@@ -89,6 +89,18 @@ function updateProductsQuantity(id, token, body) {
   return promise;
 }
 
+function getFinalOrder(token, orderId) {
+  const config = createHeaders(token);
+  const promise = axios.get(`${BASE_URL}/cart-products/${orderId}`, config);
+  return promise;
+}
+
+function getOrderDetails(token, orderId) {
+  const config = createHeaders(token);
+  const promise = axios.get(`${BASE_URL}/checkout/${orderId}`, config);
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
@@ -101,6 +113,8 @@ export {
   updateProductSizes,
   createNewOrder,
   createNewCart,
+  getFinalOrder,
+  getOrderDetails,
   getCartProducts,
   clearCart,
   updateProductsQuantity,

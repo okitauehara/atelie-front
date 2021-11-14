@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Button } from '../styles/ProductPageStyle';
 import * as S from '../styles/CheckoutPageStyle';
-import formatePrice from '../services/utils';
+import { formatePrice } from '../services/utils';
 import { getFinalOrder, getOrderDetails, getCep } from '../services/API';
 import Loading from '../components/Loading';
 

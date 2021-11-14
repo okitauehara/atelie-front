@@ -1,23 +1,46 @@
 /* eslint-disable no-nested-ternary */
-import { useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getCep, updateOrder, updateUser } from '../services/API';
+import {
+  getCep, updateOrder, updateUser, getFinalOrder,
+} from '../services/API';
 import { Button } from '../styles/ProductPageStyle';
 import * as S from '../styles/PaymentStyle';
-import UserContext from '../contexts/UserContext';
+import { calculateTotalOrder, formatePrice } from '../services/utils';
 
 function Payment() {
   const { orderId } = useParams();
-  const { user } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem('@user'));
   const [cepData, setCepData] = useState({ cep: '', number: '' });
   const [paymentData, setPaymentData] = useState({ payment: '' });
   const [cepInfo, setCepInfo] = useState('');
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const correiosAddress = 'https://buscacepinter.correios.com.br/app/endereco/index.php';
   const address = `${cepInfo.logradouro}, ${cepInfo.bairro}, ${cepInfo.localidade} - ${cepInfo.uf}`;
+
+  useEffect(async () => {
+    if (user?.token) {
+      await getFinalOrder(user?.token, orderId)
+        .then((res) => setProducts(res.data));
+    } else {
+      await Swal.fire({
+        title: 'Login necessário',
+        text: 'Para visualizar seu carrinho você precisa estar logado',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/sign-in');
+        }
+      });
+    }
+  }, []);
 
   const handleAddressChange = (event) => {
     setCepData({ ...cepData, [event.target.name]: event.target.value });
@@ -63,7 +86,7 @@ function Payment() {
               icon: 'success',
               title: 'Endereço registrado!',
             });
-            navigate('/checkout');
+            navigate(`/checkout/${orderId}`);
           });
       })
       .catch(async (err) => {
@@ -161,7 +184,13 @@ function Payment() {
             </S.LabelInput>
           </S.Option>
         </S.PayMethods>
-        <S.FinalValue>Subtotal: R$640,00</S.FinalValue>
+        <S.FinalValue>
+          Subtotal:
+          {' '}
+          R$
+          {' '}
+          {formatePrice(calculateTotalOrder(products))}
+        </S.FinalValue>
         <Button style={{ width: '100%', marginTop: '5px' }} onClick={updateInfos}>Ir para checkout</Button>
       </S.PageStyle>
       <Footer isHome="#545D66" isCart="#545D66" />

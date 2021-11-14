@@ -83,7 +83,7 @@ function Checkout() {
           <Button style={{ margin: '0px auto' }}>Finalizar compra</Button>
         </S.PageStyle>
       )}
-      <Footer />
+      <Footer isHome="#545D66" isCart="#545D66"/>
     </>
   );
 }

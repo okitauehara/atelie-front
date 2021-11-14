@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -9,9 +10,9 @@ import Swal from 'sweetalert2';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { formatePrice } from '../services/utils';
+import { formatePrice, calculateTotalOrder } from '../services/utils';
 import CartProduct from '../components/CartProduct';
-import { getCartProducts, clearCart } from '../services/API';
+import { getCartProducts, clearCart, updateProductsQuantity } from '../services/API';
 import Loading from '../components/Loading';
 
 function Cart() {
@@ -39,11 +40,7 @@ function Cart() {
       getCartProducts(orderId, user.token).then((res) => {
         const cartProducts = res.data;
         setProducts(cartProducts);
-
-        let totalPrice = 0;
-        cartProducts.forEach((p) => {
-          totalPrice += p.product_value;
-        });
+        const totalPrice = calculateTotalOrder(cartProducts);
         setTotal(totalPrice);
       });
     }
@@ -67,6 +64,34 @@ function Cart() {
     });
   }
 
+  function changeProductQuantity(product, quantity) {
+    // eslint-disable-next-line no-param-reassign
+    product.product_qty = quantity;
+    setProducts([...products]);
+    const totalPrice = calculateTotalOrder(products);
+    setTotal(totalPrice);
+  }
+
+  function handleGoToPayment() {
+    const body = {
+      products,
+    };
+    updateProductsQuantity(orderId, user.token, body)
+      .then(() => {
+        navigate(`/payment/${orderId}`);
+      })
+      .catch(async () => {
+        await Swal.fire({
+          title: 'Erro ao prosseguir para o pagamento',
+          text: 'Por favor, tente novamente',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sim',
+          cancelButtonText: 'Cancelar',
+        });
+      });
+  }
+
   return (
     <>
       <Header />
@@ -77,7 +102,11 @@ function Cart() {
           <PageStyle>
             <Products>
               {products.map((product, index) => (
-                <CartProduct key={index} product={product} />
+                <CartProduct
+                  key={index}
+                  product={product}
+                  changeProductQuantity={changeProductQuantity}
+                />
               ))}
             </Products>
             <CheckoutArea>
@@ -89,7 +118,7 @@ function Cart() {
                   {formatePrice(total)}
                 </div>
               </div>
-              <button onClick={() => navigate(`/payment/${orderId}`)} type="submit">
+              <button onClick={handleGoToPayment} type="submit">
                 Finalizar compra
               </button>
             </CheckoutArea>

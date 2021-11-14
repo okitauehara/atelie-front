@@ -83,6 +83,12 @@ function clearCart(id, token) {
   return promise;
 }
 
+function updateProductsQuantity(id, token, body) {
+  const config = createHeaders(token);
+  const promise = axios.put(`${BASE_URL}/cart/${id}`, body, config);
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
@@ -97,4 +103,5 @@ export {
   createNewCart,
   getCartProducts,
   clearCart,
+  updateProductsQuantity,
 };

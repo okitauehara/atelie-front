@@ -36,4 +36,12 @@ function loadImg(name) {
   return img;
 }
 
-export { formatePrice, loadImg };
+function calculateTotalOrder(products) {
+  let totalPrice = 0;
+  products.forEach((p) => {
+    totalPrice += p.product_value * (p.product_qty);
+  });
+  return totalPrice;
+}
+
+export { formatePrice, loadImg, calculateTotalOrder };

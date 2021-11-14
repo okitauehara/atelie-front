@@ -1,17 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Product from '../components/Product';
 import productsData from '../services/productsData';
-import { getProducts } from '../services/API';
+import { getProducts, createNewOrder } from '../services/API';
 import Loading from '../components/Loading';
+import CartContext from '../contexts/CartContext';
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const { setCart } = useContext(CartContext);
+  const user = JSON.parse(localStorage.getItem('@user'));
 
   useEffect(() => {
+    if (user?.token) {
+      createNewOrder(user.token).then((res) => {
+        setCart(res.data.order_id);
+      });
+    }
     getProducts().then((res) => {
       setProducts(res.data);
     });
@@ -20,7 +28,9 @@ function Home() {
   return (
     <>
       <Header />
-      {products.length === 0 ? <Loading /> : (
+      {products.length === 0 ? (
+        <Loading />
+      ) : (
         <PageStyle>
           <Products>
             {products.map((product, index) => (

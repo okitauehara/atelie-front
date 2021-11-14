@@ -164,7 +164,7 @@ function Payment() {
         <S.FinalValue>Subtotal: R$640,00</S.FinalValue>
         <Button style={{ width: '100%', marginTop: '5px' }} onClick={updateInfos}>Ir para checkout</Button>
       </S.PageStyle>
-      <Footer />
+      <Footer isHome="#545D66" isCart="#545D66" />
     </>
   );
 }

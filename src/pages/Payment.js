@@ -1,15 +1,16 @@
 /* eslint-disable no-nested-ternary */
 import { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getCep, updateUser } from '../services/API';
+import { getCep, updateOrder, updateUser } from '../services/API';
 import { Button } from '../styles/ProductPageStyle';
 import * as S from '../styles/PaymentStyle';
 import UserContext from '../contexts/UserContext';
 
 function Payment() {
+  const { orderId } = useParams();
   const { user } = useContext(UserContext);
   const [cepData, setCepData] = useState({ cep: '', number: '' });
   const [paymentData, setPaymentData] = useState({ payment: '' });
@@ -55,12 +56,15 @@ function Payment() {
     cepData.cep = cepData.cep.replace(/[^0-9]/g, '');
     cepData.number = Number(cepData.number);
     updateUser(user?.token, cepData)
-      .then(async () => {
-        await Swal.fire({
-          icon: 'success',
-          title: 'Endereço registrado!',
-        });
-        navigate('/checkout');
+      .then(() => {
+        updateOrder(user?.token, paymentData, orderId)
+          .then(async () => {
+            await Swal.fire({
+              icon: 'success',
+              title: 'Endereço registrado!',
+            });
+            navigate('/checkout');
+          });
       })
       .catch(async (err) => {
         if (err.response.status === 400) {
@@ -160,7 +164,7 @@ function Payment() {
         <S.FinalValue>Subtotal: R$640,00</S.FinalValue>
         <Button style={{ width: '100%', marginTop: '5px' }} onClick={updateInfos}>Ir para checkout</Button>
       </S.PageStyle>
-      <Footer />
+      <Footer isHome="#545D66" isCart="#545D66" />
     </>
   );
 }

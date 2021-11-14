@@ -4,11 +4,16 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { getProduct, updateProductSizes, createNewOrder, createNewCart } from '../services/API';
+import {
+  getProduct,
+  updateProductSizes,
+  createNewOrder,
+  createNewCart,
+} from '../services/API';
 import productsData from '../services/productsData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import formatePrice from '../services/utils';
+import { formatePrice } from '../services/utils';
 import * as S from '../styles/ProductPageStyle';
 import Loading from '../components/Loading';
 import UserContext from '../contexts/UserContext';
@@ -58,7 +63,7 @@ function Product() {
         }
       });
     } else {
-      createNewOrder(id, token)
+      createNewOrder(token)
         .then((res) => {
           const orderId = res.data.order_id;
           setCart(orderId);
@@ -87,13 +92,17 @@ function Product() {
   return (
     <>
       <Header />
-      {productInfo.id === '' ? <Loading /> : (
+      {productInfo.id === '' ? (
+        <Loading />
+      ) : (
         <S.PageStyle>
           <S.Container>
             <S.Img
               src={
-              productInfo.id === '' ? '' : productsData[productInfo.id - 1].url
-            }
+                productInfo.id === ''
+                  ? ''
+                  : productsData[productInfo.id - 1].url
+              }
               alt="product-image"
             />
             <S.ProductName>{productInfo.name}</S.ProductName>
@@ -105,12 +114,24 @@ function Product() {
               <p>Selecione o tamanho: </p>
               {sizes.map((size, index) => (
                 <>
-                  <input onClick={() => selectSize(size)} key={index} type="radio" id={size} name="size" value={size} />
+                  <input
+                    onClick={() => selectSize(size)}
+                    key={index}
+                    type="radio"
+                    id={size}
+                    name="size"
+                    value={size}
+                  />
                   <label htmlFor={size}>{size}</label>
                 </>
               ))}
             </S.SizeArea>
-            <S.Button onClick={() => addToCart(productId, user?.token)} disabled={isDisabled}>Adicionar ao carrinho</S.Button>
+            <S.Button
+              onClick={() => addToCart(productId, user?.token)}
+              disabled={isDisabled}
+            >
+              Adicionar ao carrinho
+            </S.Button>
           </S.Container>
         </S.PageStyle>
       )}

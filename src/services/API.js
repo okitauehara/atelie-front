@@ -36,9 +36,9 @@ function updateProductSizes(id, body) {
   return promise;
 }
 
-function createNewOrder(id, token) {
+function createNewOrder(token) {
   const config = createHeaders(token);
-  const promise = axios.post(`${BASE_URL}/product/${id}`, {}, config);
+  const promise = axios.post(`${BASE_URL}/product/`, {}, config);
   return promise;
 }
 
@@ -64,9 +64,27 @@ function updateUser(token, body) {
   return promise;
 }
 
-function updateOrder(token, body) {
+function updateOrder(token, body, orderId) {
   const config = createHeaders(token);
-  const promise = axios.post(`${BASE_URL}/orders`, config, body);
+  const promise = axios.post(`${BASE_URL}/orders/${orderId}`, config, body);
+  return promise;
+}
+
+function getCartProducts(id, token) {
+  const config = createHeaders(token);
+  const promise = axios.get(`${BASE_URL}/cart/${id}`, config);
+  return promise;
+}
+
+function clearCart(id, token) {
+  const config = createHeaders(token);
+  const promise = axios.delete(`${BASE_URL}/cart/${id}`, config);
+  return promise;
+}
+
+function updateProductsQuantity(id, token, body) {
+  const config = createHeaders(token);
+  const promise = axios.put(`${BASE_URL}/cart/${id}`, body, config);
   return promise;
 }
 
@@ -96,4 +114,7 @@ export {
   createNewCart,
   getFinalOrder,
   getOrderDetails,
+  getCartProducts,
+  clearCart,
+  updateProductsQuantity,
 };

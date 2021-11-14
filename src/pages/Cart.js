@@ -97,7 +97,8 @@ function Cart() {
         )
       ) : (
         <EmptyCardContainerMsg>
-          Carrinho vazio! Volte à home e adicione algum produto :)
+          <h1>Carrinho vazio :(</h1>
+          Volte à home e adicione algum produto
         </EmptyCardContainerMsg>
       )}
       <Footer isHome="#545D66" isCart="#368DE3" />

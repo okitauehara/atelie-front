@@ -89,7 +89,7 @@ function Cart() {
                   {formatePrice(total)}
                 </div>
               </div>
-              <button onClick={() => navigate('/payment')} type="submit">
+              <button onClick={() => navigate(`/payment/${orderId}`)} type="submit">
                 Finalizar compra
               </button>
             </CheckoutArea>

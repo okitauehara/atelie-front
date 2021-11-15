@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://atelie-staging.herokuapp.com';
+const BASE_URL = 'http://localhost:4000';
 // https://atelie-staging.herokuapp.com
 
 function createHeaders(token) {
@@ -101,6 +101,12 @@ function getOrderDetails(token, orderId) {
   return promise;
 }
 
+function finishOrder(token, orderId) {
+  const config = createHeaders(token);
+  const promise = axios.put(`${BASE_URL}/finish-order/${orderId}`, {}, config);
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
@@ -118,4 +124,5 @@ export {
   getCartProducts,
   clearCart,
   updateProductsQuantity,
+  finishOrder,
 };

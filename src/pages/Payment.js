@@ -29,14 +29,18 @@ function Payment() {
     } else {
       await Swal.fire({
         title: 'Login necessário',
-        text: 'Para visualizar seu carrinho você precisa estar logado',
+        text: 'Para atualizar suas informações de endereço e pagamento, você precisa estar logado',
         icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sim',
-        cancelButtonText: 'Cancelar',
+        showDenyButton: true,
+        confirmButtonText: 'Fazer Login',
+        denyButtonText: 'Ir para Home',
+        confirmButtonColor: '#2A6DB0',
+        denyButtonColor: '#AAA',
       }).then((result) => {
         if (result.isConfirmed) {
           navigate('/sign-in');
+        } else {
+          navigate('/');
         }
       });
     }

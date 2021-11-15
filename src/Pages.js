@@ -6,6 +6,7 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
+import Success from './pages/Success';
 
 function Pages() {
   return (
@@ -17,6 +18,7 @@ function Pages() {
       <Route path="/cart/:orderId" element={<Cart />} />
       <Route path="/payment/:orderId" element={<Payment />} />
       <Route path="/checkout/:orderId" element={<Checkout />} />
+      <Route path="success" element={<Success />} />
     </Routes>
   );
 }

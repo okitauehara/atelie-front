@@ -1,20 +1,47 @@
 import styled from 'styled-components';
-import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import Checkmark from '../components/Checkmark';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Success() {
+  const user = JSON.parse(localStorage.getItem('@user'));
+  const navigate = useNavigate();
+
+  useEffect(async () => {
+    if (!user) {
+      await Swal.fire({
+        title: 'Login necessário',
+        text: 'Para acessar essa rota, você precisa estar logado',
+        icon: 'warning',
+        showDenyButton: true,
+        confirmButtonText: 'Fazer Login',
+        denyButtonText: 'Ir para Home',
+        confirmButtonColor: '#2A6DB0',
+        denyButtonColor: '#AAA',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/sign-in');
+        } else {
+          navigate('/');
+        }
+      });
+    }
+  }, []);
+
   return (
     <>
       <Header />
       <PageStyle>
-        <CheckmarkIcon />
+        <Checkmark />
         <Texts>
           <SuccessText>Pedido concluído com sucesso!!</SuccessText>
           <SuccessText>Obrigado pela preferência :)</SuccessText>
         </Texts>
       </PageStyle>
-      <Footer />
+      <Footer isHome="#545D66" isCart="#545D66" />
     </>
   );
 }
@@ -27,12 +54,6 @@ const PageStyle = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const CheckmarkIcon = styled(IoIosCheckmarkCircleOutline)`
-  width: 150px;
-  height: 150px;
-  color: #183E63;
 `;
 
 const Texts = styled.div`

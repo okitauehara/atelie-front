@@ -52,14 +52,18 @@ function Product() {
     if (user === null) {
       await Swal.fire({
         title: 'Deseja fazer login?',
-        text: 'Para adicionar produtos ao carrinho você precisa estar logado',
+        text: 'Para adicionar produtos ao carrinho, você precisa estar logado',
         icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sim',
-        cancelButtonText: 'Cancelar',
+        showDenyButton: true,
+        confirmButtonText: 'Fazer Login',
+        denyButtonText: 'Ir para Home',
+        confirmButtonColor: '#2A6DB0',
+        denyButtonColor: '#AAA',
       }).then((result) => {
         if (result.isConfirmed) {
           navigate('/sign-in');
+        } else {
+          navigate('/');
         }
       });
     } else {

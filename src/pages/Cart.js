@@ -26,14 +26,18 @@ function Cart() {
     if (!user?.token) {
       await Swal.fire({
         title: 'Login necessário',
-        text: 'Para visualizar seu carrinho você precisa estar logado',
+        text: 'Para acessar o seu carrinho, você precisa estar logado',
         icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sim',
-        cancelButtonText: 'Cancelar',
+        showDenyButton: true,
+        confirmButtonText: 'Fazer Login',
+        denyButtonText: 'Ir para Home',
+        confirmButtonColor: '#2A6DB0',
+        denyButtonColor: '#AAA',
       }).then((result) => {
         if (result.isConfirmed) {
           navigate('/sign-in');
+        } else {
+          navigate('/');
         }
       });
     } else {
@@ -54,6 +58,7 @@ function Cart() {
       showCancelButton: true,
       confirmButtonText: 'Sim',
       cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#2A6DB0',
     }).then((result) => {
       if (result.isConfirmed) {
         clearCart(orderId, user.token)
@@ -84,10 +89,7 @@ function Cart() {
         await Swal.fire({
           title: 'Erro ao prosseguir para o pagamento',
           text: 'Por favor, tente novamente',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sim',
-          cancelButtonText: 'Cancelar',
+          icon: 'error',
         });
       });
   }
@@ -191,9 +193,10 @@ const EmptyCardContainerMsg = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  font-size: 24px;
   font-family: Roboto, 'sans-serif';
-  color: #368de3;
+  line-height: 1.5;
+  color: #183E63;
 `;
 
 export default Cart;

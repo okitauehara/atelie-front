@@ -27,6 +27,7 @@ function Header() {
       showCancelButton: true,
       confirmButtonText: 'Sim',
       cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#2A6DB0',
     }).then((result) => {
       if (result.isConfirmed) {
         requestSignOut(user.token)

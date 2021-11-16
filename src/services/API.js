@@ -107,6 +107,12 @@ function finishOrder(token, orderId) {
   return promise;
 }
 
+function sendEmailConfirmation(token, orderId) {
+  const config = createHeaders(token);
+  const promise = axios.post(`${BASE_URL}/checkout/${orderId}`, {}, config);
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
@@ -125,4 +131,5 @@ export {
   clearCart,
   updateProductsQuantity,
   finishOrder,
+  sendEmailConfirmation,
 };

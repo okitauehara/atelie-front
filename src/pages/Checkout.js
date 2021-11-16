@@ -7,7 +7,7 @@ import { Button } from '../styles/ProductPageStyle';
 import * as S from '../styles/CheckoutPageStyle';
 import { formatePrice } from '../services/utils';
 import {
-  getFinalOrder, getOrderDetails, getCep, finishOrder,
+  getFinalOrder, getOrderDetails, getCep, finishOrder, sendEmailConfirmation,
 } from '../services/API';
 import Loading from '../components/Loading';
 
@@ -77,9 +77,12 @@ function Checkout() {
   }, []);
 
   const submitOrder = () => {
-    finishOrder(user?.token, orderId)
+    sendEmailConfirmation(user?.token, orderId)
       .then(() => {
-        navigate('/success');
+        finishOrder(user?.token, orderId)
+          .then(() => {
+            navigate('/success');
+          });
       });
   };
 

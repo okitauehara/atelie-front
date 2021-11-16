@@ -1,8 +1,8 @@
-import NikeShirt from '../assets/Camisa Nike.jpg';
-import AdidasShirt from '../assets/Camisa Adidas.jpg';
+import DudalinaShirt from '../assets/Camisa Dudalina.jpg';
+import AramisShirt from '../assets/Camisa Aramis.jpg';
 import LacosteShirt from '../assets/Camisa Lacoste.jpg';
-import NikePants from '../assets/Calça Nike.jpg';
-import AdidasPants from '../assets/Calça Adidas.jpg';
+import DudalinaPants from '../assets/Calça Dudalina.jpg';
+import AramisPants from '../assets/Calça Aramis.jpg';
 import LacostePants from '../assets/Calça Lacoste.jpg';
 
 const products = [
@@ -13,16 +13,16 @@ const products = [
     url: LacostePants,
   },
   {
-    url: NikeShirt,
+    url: DudalinaShirt,
   },
   {
-    url: NikePants,
+    url: DudalinaPants,
   },
   {
-    url: AdidasShirt,
+    url: AramisShirt,
   },
   {
-    url: AdidasPants,
+    url: AramisPants,
   },
 ];
 

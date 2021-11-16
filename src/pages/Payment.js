@@ -153,7 +153,7 @@ function Payment() {
               type="radio"
               name="payment"
               id="bill"
-              value="boleto"
+              value="Boleto"
               onChange={handlePaymentChange}
             />
             <S.LabelInput htmlFor="bill">
@@ -166,7 +166,7 @@ function Payment() {
               type="radio"
               name="payment"
               id="credit"
-              value="cartao"
+              value="Cartão"
               onChange={handlePaymentChange}
             />
             <S.LabelInput htmlFor="credit">
@@ -179,7 +179,7 @@ function Payment() {
               type="radio"
               name="payment"
               id="paypal"
-              value="paypal"
+              value="PayPal"
               onChange={handlePaymentChange}
             />
             <S.LabelInput htmlFor="paypal">

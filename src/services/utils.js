@@ -17,16 +17,16 @@ function loadImg(name) {
     case 'Calça Lacoste':
       img = productsData[1].url;
       break;
-    case 'Camisa Nike':
+    case 'Camisa Dudalina':
       img = productsData[2].url;
       break;
-    case 'Calça Nike':
+    case 'Calça Dudalina':
       img = productsData[3].url;
       break;
-    case 'Camisa Adidas':
+    case 'Camisa Aramis':
       img = productsData[4].url;
       break;
-    case 'Calça Adidas':
+    case 'Calça Aramis':
       img = productsData[5].url;
       break;
     default:
@@ -39,7 +39,7 @@ function loadImg(name) {
 function calculateTotalOrder(products) {
   let totalPrice = 0;
   products.forEach((p) => {
-    totalPrice += p.product_value * (p.product_qty);
+    totalPrice += p.product_value * p.product_qty;
   });
   return totalPrice;
 }

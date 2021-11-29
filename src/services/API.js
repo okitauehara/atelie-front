@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://atelie-staging.herokuapp.com';
-// https://atelie-staging.herokuapp.com
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 function createHeaders(token) {
   const config = {

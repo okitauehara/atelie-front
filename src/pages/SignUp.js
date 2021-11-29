@@ -38,11 +38,15 @@ function SignUp() {
             icon: 'error',
             title: 'Verifique se todos os dados inseridos são válidos',
           });
-        }
-        if (err.response.status === 409) {
+        } else if (err.response.status === 409) {
           Swal.fire({
             icon: 'error',
             title: 'O e-mail inserido já está em uso',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Houve um erro desconhecido no servidor',
           });
         }
         setIsDisabled(false);

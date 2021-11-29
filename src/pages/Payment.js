@@ -99,11 +99,15 @@ function Payment() {
             icon: 'error',
             title: 'Verifique se todos os campos foram preenchidos corretamente',
           });
-        }
-        if (err.response.status === 404) {
+        } else if (err.response.status === 404) {
           Swal.fire({
             icon: 'error',
             title: 'Não foi possível associar este endereço a um usuário cadastrado',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Houve um erro desconhecido no servidor',
           });
         }
       });

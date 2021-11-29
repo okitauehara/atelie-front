@@ -34,11 +34,15 @@ function Login() {
             icon: 'error',
             title: 'Verifique se todos os dados inseridos são válidos',
           });
-        }
-        if (err.response.status === 404) {
+        } else if (err.response.status === 404) {
           Swal.fire({
             icon: 'error',
             title: 'Usuário não cadastrado',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Houve um erro desconhecido no servidor',
           });
         }
         setIsDisabled(false);
